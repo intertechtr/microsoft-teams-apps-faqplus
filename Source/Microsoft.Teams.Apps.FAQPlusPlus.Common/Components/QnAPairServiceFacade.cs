@@ -110,7 +110,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
 
                 var answer = await ConsolidatedAnswer(text);
-                answer += "<ul><li>[Bing](https://www.bing.com/)</li><li>![Duck on a rock](http://aka.ms/Fo983c)</li></ul>";
+                //answer += "<ul><li>[Bing](https://www.bing.com/)</li><li>![Duck on a rock](http://aka.ms/Fo983c)</li></ul>";
                 IMessageActivity messageActivity = MessageFactory.Attachment(ResponseCard.GetCard(answer, text, this.appBaseUri, payload));
                 messageActivity.TextFormat = "markdown";
                 await turnContext.SendActivityAsync(messageActivity).ConfigureAwait(false);

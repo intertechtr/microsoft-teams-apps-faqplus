@@ -201,6 +201,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             using (var sr = new StreamReader(returnData.GetRawResponse().Content.ToStream()))
             using (var jsonTextReader = new JsonTextReader(sr))
             {
+               try {
                 var jsObj = serializer.Deserialize(jsonTextReader) as JObject;
                 var valueSection = jsObj["value"];
 
@@ -208,7 +209,10 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                 //searchResult = valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
 
                 //jsObj["value"].Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
-
+                }
+                catch{
+                    return searchResult;
+                }
             }
 
 

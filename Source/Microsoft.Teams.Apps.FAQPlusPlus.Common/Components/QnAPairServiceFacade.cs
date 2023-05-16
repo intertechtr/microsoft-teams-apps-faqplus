@@ -165,7 +165,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
         async Task<string> ConsolidatedAnswer(string userMessage)
         {
-            var question = "Jenkins ile otomatik database paketi nasıl oluştururum?";
+            var question = userMessage;
             var context = await GetSearchResult(question);
             var promptText = CreateQuestionAndContext(question, context);
 

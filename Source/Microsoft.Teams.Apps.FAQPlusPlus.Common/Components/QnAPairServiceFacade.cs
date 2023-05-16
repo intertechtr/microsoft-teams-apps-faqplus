@@ -216,7 +216,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             return searchResult;
           }
           catch{
-            return searchResult;
+            return string.Empty;
           }
 
         }

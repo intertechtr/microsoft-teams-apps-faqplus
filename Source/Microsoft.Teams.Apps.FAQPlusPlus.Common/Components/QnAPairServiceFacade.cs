@@ -178,7 +178,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
         // caglar - search query
         public async Task<string> GetSearchResult(string searchQuery, int? count = null, int? skip = null)
         {
-
+           try {
             global::Azure.Search.Documents.SearchOptions searchOptions = new global::Azure.Search.Documents.SearchOptions();
             searchOptions.QueryLanguage = "tr-TR";
             searchOptions.SemanticConfigurationName = "mergenmarkdown-config";
@@ -201,7 +201,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             using (var sr = new StreamReader(returnData.GetRawResponse().Content.ToStream()))
             using (var jsonTextReader = new JsonTextReader(sr))
             {
-               try {
+               
                 var jsObj = serializer.Deserialize(jsonTextReader) as JObject;
                 var valueSection = jsObj["value"];
 
@@ -209,14 +209,15 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                 //searchResult = valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
 
                 //jsObj["value"].Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
-                }
-                catch{
-                    return searchResult;
-                }
+               
             }
 
 
             return searchResult;
+             }
+                catch{
+                    return searchResult;
+                }
 
         }
 

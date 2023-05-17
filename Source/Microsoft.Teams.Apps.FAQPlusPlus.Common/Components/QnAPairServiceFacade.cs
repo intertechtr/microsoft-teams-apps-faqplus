@@ -204,8 +204,14 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                
                 var jsObj = serializer.Deserialize(jsonTextReader) as JObject;
                 var valueSection = jsObj["value"];
-
-                searchResult = valueSection.Children().First()["content"].Value<string>();
+                var reRankerScore = = Convert.ToDecimal(valueSection.Children().First()["content"].Value<string>());
+                
+                if(reRankerScore<1)
+                {
+                    return searchResult;  
+                }
+                searchResult = valueSection.Children().First()["@search.rerankerScore""].Value<string>();
+                
                 //searchResult = valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
 
                 //jsObj["value"].Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();

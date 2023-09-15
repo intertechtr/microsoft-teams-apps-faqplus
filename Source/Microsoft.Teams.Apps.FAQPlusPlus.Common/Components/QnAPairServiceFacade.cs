@@ -229,33 +229,13 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
         string CreateQuestionAndContext(string question, string context)
         {
-            return string.Format("[Question] {0} \r\n\r\n            [Context] {1} \r\n           ", question, context);
+            return string.Format("[Question] {0} \r\n\r\n[Context] {1} \r\n", question, context);
         }
 
         public async Task<string> GetAnswerFromGPT(string promptText)
         {
-            //            var prompt =
-            //    @"
-
-            //    I am an assistant that helps users with software and IT questions using context provided in the prompt. I only respond in Turkish and format my response in Markdown language.    
-            //    I will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from my memory.
-
-            //    Q: [Question] Jenkins ile otomatik database paketi nasıl oluştururum?&nbsp; &nbsp; 
-
-            //[Context] Jenkins Konfigurasyonu Nasıl Yapılır?\r\n\r\nBu bölümde yaratılan jenkins projesinin, aşamalı olarak nasıl konfigürasyon edileceğini adım adım yapacağız.\r\n\r\nAşağıdaki görseldeki gibi öncelikle projenin adını tanımlarız, description bölümüne yazılacak tanım, adminin insiyatifine göre belirlenebilir.\r\n\r\nDiscard old builds kısmında tanımlanan log rotation sayesinde yapılan buildları belirlenen bir tarihe kadar saklama görevini gerçekleştirir.\r\n\r\nRestrict where this project can be run →  Eğer projeniz jenkins ana sunucu haricinde başka bir sunucuda çalışıyor ise, bu alanda projenin derleneceği sunucuyu projeye belirtmeniz gerekmektedir.\r\n\r\nBir üstteki sekmede belirtilen alanda advanced sekmesine tıkladığımızda Use custom workspace alanından projenin atılacak sunucudaki dizinini belirleriz.\r\n\r\n(Not:Tanımlanan projenin JenkinsWorkspace altında hangi ortama ait ise o dizin altında derlenmesi gerekmektedir.)\r\n\r\nSource Code Management → Bu alanda kaynağın nereden alınacağı belirtilir.Projelerimiz için TFS seçeneğini seçeriz.Seçtikten sonra çıkan alt dizinlerde; Collection URL kullandığımız tfs pathini gireriz.Project path 'de ise derlemek istenilen proje seçilir.(TFS'te gibi $ simgeli path girilmesi gerekmektedir.) Credentials otomatik olarak bırakılır.\r\n\r\nTeam foundation version control (tfvc)'te advanced sekmesini tıkladığımızda, aşağıdaki ek bölümler karşımıza çıkar.Use update bölümünü tiklersek, projeyi derlediğimizde mevcut olan proje dosyalarını tarar, farklı olan birşey varsa proje dizinine ekler.Use overwrite ise projeye yeni eklenen birşey olsun olmasın, projeyi her derlediğimizde mevcut olan tüm dosyaları siler ve yeniden oluşturur.Update, overwrite'a göre daha hızlı derlenir.\r\n\r\nWorkspace name → Tfs üzerinde mapping yapılırken bu isim kullanılır.Verilen bu isim her proje için unique(eşsiz) olmalıdır.Aşağıdaki örnekteki gibi yazım kurallarına dikkat edilerek manuel olarak oluşturulabilir yada aşağıdaki gibi standardizasyonlara uygun olması için parametrik olarak eklenilmesi önerilir.\r\n\r\nBuild Triggers → Derlemeyi tetikleyen zamanı ayarladığımız alt başlık bölümüdür.\r\n\r\nProjenin yapısına göre trigger belirlenir.Madde olarak sıralayacak olursak;\r\n\r\n1) Script ve diğer yollarla uzaktan build tetikleme\r\n\r\n2) Başka bir proje ile bağlantılı bir yapısı varsa, o proje tetiklendiğinde bu projenin de otomatik olarak derlenmesini sağlama\r\n\r\n3)Periyodik olarak tetikleme\r\n\r\n4) TFS'de yapılan değişiklikte tetikleme\r\n\r\n5) Github hook tetikleme\r\n\r\n6) Source Control Management (SCM) → projelerde en fazla kullanılanıdır.Schedule bölümünde projenin ne sıklıkla, taranması gerektiğini belirtiriz.Aşağıdaki örnekten yola çıkarsak, her 10 dakika bir projeyi taramasını belirtiyor.Eğer tarama sırasında yeni birşeyle karşılaşırsa, derlemeye başlar.\r\n\r\nCron schedule zaman formatını detaylı incelemek için linke göz atabilirsiniz. → http://www.scmgalaxy.com/tutorials/setting-up-the-cron-jobs-in-jenkins-using-build-periodically-scheduling-the-jenins-job/
-            //    A:
-            //    ";
-
-            var prompt =
-@"You are an assistant that helps users with software and IT questions using context provided in the prompt. You only respond in Turkish and format your response in Markdown language. You will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from your memory. If the [Context] is not really relevant to the [Question], or if the [Question] is not a question at all and more of a chit chat, ignore the [Context] completely and only respond to the question with chit chat.
-
-Question: " + promptText + "
-
-Context: ";
-
-            var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, "I am an assistant that helps users with software and IT questions using context provided in the prompt. I only respond in Turkish and format my response in Markdown language.    \r\n    I will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from my memory.");
+            var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, "You are an assistant that helps users with software and IT questions using context provided in the prompt. You only respond in Turkish and format your response in Markdown language. You will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from your memory. If the [Context] is not really relevant to the [Question], or if the [Question] is not a question at all and more of a chit chat, ignore the [Context] completely and only respond to the question with chit chat.");
             var chatMessageUser = new ChatMessage(ChatRole.User, promptText);
-
 
             var completionOptions = new ChatCompletionsOptions
             {

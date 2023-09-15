@@ -249,25 +249,9 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             var prompt =
 @"You are an assistant that helps users with software and IT questions using context provided in the prompt. You only respond in Turkish and format your response in Markdown language. You will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from your memory. If the [Context] is not really relevant to the [Question], or if the [Question] is not a question at all and more of a chit chat, ignore the [Context] completely and only respond to the question with chit chat.
 
-Question:" + promptText + "Context:";
+Question: " + promptText + "
 
-
-            //var completionOptions = new CompletionsOptions
-            //{
-            //    Prompts = { prompt },
-
-            //    MaxTokens = 4000,
-            //    Temperature = 0.7f,
-            //    FrequencyPenalty = 0.5f,
-            //    PresencePenalty = 0.0f,
-            //    NucleusSamplingFactor = 0.95F, // Top P
-            //    StopSequences = { "You:" }
-
-            //};
-
-
-
-            //Completions response = openAIClient.GetCompletions(AOAI_DEPLOYMENTID, completionOptions);
+Context: ";
 
             var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, "I am an assistant that helps users with software and IT questions using context provided in the prompt. I only respond in Turkish and format my response in Markdown language.    \r\n    I will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from my memory.");
             var chatMessageUser = new ChatMessage(ChatRole.User, promptText);
@@ -288,21 +272,11 @@ Question:" + promptText + "Context:";
 
             ChatCompletions response = openAIClient.GetChatCompletions(this.options.AOAI_DEPLOYMENTID, completionOptions);
 
-
-
             var responseText = response.Choices.First().Message.Content;
 
             return responseText;
 
         }
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Method perform update operation of question and answer pair.

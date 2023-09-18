@@ -49,5 +49,9 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Models.Configuration
         public string SEARCH_INDEX_NAME { get; set; }
         public string SEARCH_SERVICE_NAME { get; set; }
         public string SEARCH_QUERY_KEY { get; set; }
+
+                public string SettingForPrompt { get; set; }
+        public string SettingForTemprature { get; set; }
+        public string SettingForMaxToken{ get; set; }
     }
 }

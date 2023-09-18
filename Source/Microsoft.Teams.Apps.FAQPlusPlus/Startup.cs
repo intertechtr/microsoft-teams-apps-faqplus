@@ -126,6 +126,12 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus
                 botSettings.SEARCH_INDEX_NAME = this.Configuration["SEARCH_INDEX_NAME"];
                 botSettings.SEARCH_SERVICE_NAME = this.Configuration["SEARCH_SERVICE_NAME"];
                 botSettings.SEARCH_QUERY_KEY = this.Configuration["SEARCH_QUERY_KEY"];
+
+
+                botSettings.SettingForPrompt = this.Configuration["SettingForPrompt"];
+                botSettings.SettingForTemperature = this.Configuration["SettingForTemperature"];
+                botSettings.SettingForMaxToken = this.Configuration["SettingForMaxToken"];
+                
                 
             });
             services.AddSingleton<Common.Providers.IConfigurationDataProvider>(new Common.Providers.ConfigurationDataProvider(this.Configuration["StorageConnectionString"]));

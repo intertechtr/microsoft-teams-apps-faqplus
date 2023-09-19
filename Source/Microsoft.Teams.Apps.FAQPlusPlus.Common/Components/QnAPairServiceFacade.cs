@@ -204,7 +204,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                
                 var jsObj = serializer.Deserialize(jsonTextReader) as JObject;
                 var valueSection = jsObj["value"];
-                var reRankerScore = = Convert.ToDecimal(valueSection.Children().First()["content"].Value<string>());
+                var reRankerScore = Convert.ToDecimal(valueSection.Children().First()["content"].Value<string>());
                 
                 if(reRankerScore<1)
                 {

@@ -210,7 +210,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                 {
                     return searchResult;  
                 }
-                searchResult = valueSection.Children().First()["@search.rerankerScore""].Value<string>();
+                searchResult = valueSection.Children().First()["@search.rerankerScore"].Value<string>();
                 
                 //searchResult = valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
 

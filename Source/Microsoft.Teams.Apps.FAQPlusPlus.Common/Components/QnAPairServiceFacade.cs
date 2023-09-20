@@ -250,7 +250,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                 StopSequences = { "You:" }
 
             };
-
+            this.logger.Log(LogLevel.Information,"Prompt:" + promptText);
             ChatCompletions response = openAIClient.GetChatCompletions(this.options.AOAI_DEPLOYMENTID, completionOptions);
 
             var responseText = response.Choices.First().Message.Content;

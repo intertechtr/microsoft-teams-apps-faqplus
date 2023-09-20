@@ -235,15 +235,15 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
         public async Task<string> GetAnswerFromGPT(string promptText)
         {
             //var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, "You are an assistant that helps users with software and IT questions using context provided in the prompt. You only respond in Turkish and format your response in Markdown language. You will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from your memory. If the [Context] is not really relevant to the [Question], or if the [Question] is not a question at all and more of a chit chat, ignore the [Context] completely and only respond to the question with chit chat.");
-            var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, botSettings.CurrentValue.SettingForPrompt);
+            var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, options.SettingForPrompt);
             var chatMessageUser = new ChatMessage(ChatRole.User, promptText);
 
             var completionOptions = new ChatCompletionsOptions
             {
                 Messages = { chatMessageAsistant, chatMessageUser },
 
-                MaxTokens = Convert.ToInt32(botSettings.CurrentValue.SettingForMaxToken),
-                Temperature = float.Parse(botSettings.CurrentValue.SettingForTemperature) ,
+                MaxTokens = Convert.ToInt32(options.SettingForMaxToken),
+                Temperature = float.Parse(options.SettingForTemperature) ,
                 FrequencyPenalty = 0.5f,
                 PresencePenalty = 0.0f,
                 NucleusSamplingFactor = 0.95F, // Top P

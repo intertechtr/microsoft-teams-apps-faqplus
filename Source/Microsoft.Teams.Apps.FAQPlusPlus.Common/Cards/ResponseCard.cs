@@ -227,21 +227,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Cards
 
             var cardBodyToConstruct = new List<AdaptiveElement>()
             {
-                new AdaptiveTextBlock
-                {
-                    Weight = AdaptiveTextWeight.Bolder,
-                    Text = Strings.ResponseHeaderText,
-                    Wrap = true,
-                    HorizontalAlignment = textAlignment,
-                },
-                new AdaptiveTextBlock
-                {
-                    Size = AdaptiveTextSize.Default,
-                    Wrap = true,
-                    Text = userQuestion,
-                    IsVisible = true,
-                    HorizontalAlignment = textAlignment,
-                },
+               
                 //new AdaptiveTextBlock
                 //{
                 //    Wrap = true,

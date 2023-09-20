@@ -109,7 +109,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Cards
 
             var cardBodyToConstruct = new List<AdaptiveElement>()
             {
-                new AdaptiveTextBlock
+              /*  new AdaptiveTextBlock
                 {
                     Weight = AdaptiveTextWeight.Bolder,
                     Text = Strings.ResponseHeaderText,
@@ -123,7 +123,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Cards
                     Text = response?.Questions[0],
                     IsVisible = isRichCard,
                     HorizontalAlignment = textAlignment,
-                },
+                },*/
                 new AdaptiveTextBlock
                 {
                     Wrap = true,

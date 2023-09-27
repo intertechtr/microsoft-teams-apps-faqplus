@@ -186,7 +186,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             searchOptions.QueryCaption = "extractive";
             searchOptions.QueryAnswer = "extractive";
             searchOptions.QueryType = global::Azure.Search.Documents.Models.SearchQueryType.Semantic;
-            searchOptions.QueryAnswerCount = 10;
+            searchOptions.QueryAnswerCount = 1;
 
             var returnData = srchclient.Search<SearchDocument>(searchQuery, searchOptions);
 

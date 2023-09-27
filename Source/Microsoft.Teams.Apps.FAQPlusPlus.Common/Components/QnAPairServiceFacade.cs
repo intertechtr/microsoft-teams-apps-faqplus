@@ -179,6 +179,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
         public async Task<string> GetSearchResult(string searchQuery, int? count = null, int? skip = null)
         {
            try {
+            this.logger.Log(LogLevel.Information,"SearchQuery:" + searchQuery);
             global::Azure.Search.Documents.SearchOptions searchOptions = new global::Azure.Search.Documents.SearchOptions();
             searchOptions.QueryLanguage = "tr-TR";
             searchOptions.SemanticConfigurationName = "mergenmarkdown-config";
@@ -204,13 +205,13 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                
                 var jsObj = serializer.Deserialize(jsonTextReader) as JObject;
                 var valueSection = jsObj["value"];
-                var reRankerScore = Convert.ToDecimal(valueSection.Children().First()["content"].Value<string>());
+                var reRankerScore = Convert.ToDecimal(valueSection.Children().First()["@search.rerankerScore"].Value<string>());
                 
                 if(reRankerScore<1)
                 {
-                    return searchResult;  
+                    return "No information was found. Answer the question with your general knowledge.";  
                 }
-                searchResult = valueSection.Children().First()["@search.rerankerScore"].Value<string>();
+                searchResult = valueSection.Children().First()["content"].Value<string>();
                 
                 //searchResult = valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
 
@@ -221,7 +222,8 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
             return searchResult;
           }
-          catch{
+          catch(Exception ex){
+            this.logger.Log(LogLevel.Error,ex.Message);
             return string.Empty;
           }
 

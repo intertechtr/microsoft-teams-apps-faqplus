@@ -273,6 +273,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
            } else {
                 responseText = response.Choices.First().Message.Content;
            }
+           return responseText;
         }
 
         /// <summary>

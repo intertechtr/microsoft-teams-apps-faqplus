@@ -266,10 +266,10 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Cards
         /// <returns>A list of adaptive actions.</returns>
         private static List<AdaptiveAction> BuildListOfActions(string userQuestion, string answer)
         {
-            List<AdaptiveAction> actionsList = new List<AdaptiveAction>
-            {
+            List<AdaptiveAction> actionsList = new List<AdaptiveAction>();
+            /*{
                 // Adds the "Ask an expert" button.
-            /*    new AdaptiveSubmitAction
+                new AdaptiveSubmitAction
                 {
                     Title = Strings.AskAnExpertButtonText,
                     Data = new ResponseCardPayload

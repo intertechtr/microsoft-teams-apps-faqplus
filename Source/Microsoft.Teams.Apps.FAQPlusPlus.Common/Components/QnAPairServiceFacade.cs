@@ -236,8 +236,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
         public async Task<string> GetAnswerFromGPT(string promptText)
         {
-            var today = DateTime.Today;
-            var yesterday = today.AddDays(-1);
+            var today = DateTime.Today;            
             var thisWeekStart = today.AddDays(-(int)today.DayOfWeek);
             var thisWeekEnd = thisWeekStart.AddDays(7).AddSeconds(-1);
             //var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, "You are an assistant that helps users with software and IT questions using context provided in the prompt. You only respond in Turkish and format your response in Markdown language. You will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from your memory. If the [Context] is not really relevant to the [Question], or if the [Question] is not a question at all and more of a chit chat, ignore the [Context] completely and only respond to the question with chit chat.");
@@ -258,9 +257,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             };
             this.logger.Log(LogLevel.Information,"Prompt:" + promptText);
             ChatCompletions response = openAIClient.GetChatCompletions(this.options.AOAI_DEPLOYMENTID, completionOptions);
-
             var responseText = response.Choices.First().Message.Content;
-
             return responseText;
 
         }

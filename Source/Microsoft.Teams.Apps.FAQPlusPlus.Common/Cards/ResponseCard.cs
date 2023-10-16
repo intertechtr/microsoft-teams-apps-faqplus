@@ -269,7 +269,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Cards
             List<AdaptiveAction> actionsList = new List<AdaptiveAction>
             {
                 // Adds the "Ask an expert" button.
-                new AdaptiveSubmitAction
+            /*    new AdaptiveSubmitAction
                 {
                     Title = Strings.AskAnExpertButtonText,
                     Data = new ResponseCardPayload
@@ -301,7 +301,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Cards
                         KnowledgeBaseAnswer = answer,
                     },
                 },
-            };
+            };*/
 
             return actionsList;
         }

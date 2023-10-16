@@ -256,7 +256,12 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
             };
             this.logger.Log(LogLevel.Information,"Prompt:" + promptText);
+/*
             ChatCompletions response = openAIClient.GetChatCompletions(this.options.AOAI_DEPLOYMENTID, completionOptions);
+            var responseText = response.Choices.First().Message.Content;
+            return responseText;
+*/                      
+            Response<ChatCompletions> response = openAIClient.GetChatCompletions(this.options.AOAI_DEPLOYMENTID, completionOptions);
             Response rawResponse = response.GetRawResponse();
             var responseText = "";
             if (rawResponse.IsError) {

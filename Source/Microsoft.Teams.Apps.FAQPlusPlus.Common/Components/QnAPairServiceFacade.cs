@@ -236,12 +236,12 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
         public async Task<string> GetAnswerFromGPT(string promptText)
         {
-            var today = baseDate;
-            var yesterday = baseDate.AddDays(-1);
-            var thisWeekStart = baseDate.AddDays(-(int)baseDate.DayOfWeek);
+            var today = DateTime.Today;
+            var yesterday = today.AddDays(-1);
+            var thisWeekStart = today.AddDays(-(int)today.DayOfWeek);
             var thisWeekEnd = thisWeekStart.AddDays(7).AddSeconds(-1);
             //var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, "You are an assistant that helps users with software and IT questions using context provided in the prompt. You only respond in Turkish and format your response in Markdown language. You will answer the [Question] below objectively in a casual and friendly tone, using the [Context] below it, and information from your memory. If the [Context] is not really relevant to the [Question], or if the [Question] is not a question at all and more of a chit chat, ignore the [Context] completely and only respond to the question with chit chat.");
-            var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, string.Format(options.SettingForPrompt,DateTime.Now.ToString("dddd, dd MMMM yyyy"), thisWeekStart.ToString("dddd, dd MMMM yyyy"), thisWeekEnd.ToString("dddd, dd MMMM yyyy")));
+            var chatMessageAsistant = new ChatMessage(ChatRole.Assistant, string.Format(options.SettingForPrompt,today.ToString("dddd, dd MMMM yyyy"), thisWeekStart.ToString("dddd, dd MMMM yyyy"), thisWeekEnd.ToString("dddd, dd MMMM yyyy")));
             var chatMessageUser = new ChatMessage(ChatRole.User, promptText);
 
             var completionOptions = new ChatCompletionsOptions

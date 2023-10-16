@@ -260,7 +260,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             var responseText = "";
             if (rawResponse.IsError) {
                 if (rawResponse.Status == 429) {
-                      responseText = "Şu anda sistemde bir yoğunluk var. Lütfen bir dakika sonra tekrar deneyin."
+                      responseText = "Şu anda sistemde bir yoğunluk var. Lütfen bir dakika sonra tekrar deneyin.";
                 } else {
                       responseText = "Beklenmeyen bir hata alındı: " + rawResponse.ReasonPhrase;
                 }

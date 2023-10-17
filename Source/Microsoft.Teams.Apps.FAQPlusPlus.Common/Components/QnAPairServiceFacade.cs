@@ -261,8 +261,8 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             var responseText = response.Choices.First().Message.Content;
             return responseText;
 */                      
-            Response<ChatCompletions> response = openAIClient.GetChatCompletions(this.options.AOAI_DEPLOYMENTID, completionOptions);
-            Response rawResponse = response.GetRawResponse();
+            var response = openAIClient.GetChatCompletions(this.options.AOAI_DEPLOYMENTID, completionOptions);
+            var rawResponse = response.GetRawResponse();
             var responseText = "";
             if (rawResponse.IsError) {
                 if (rawResponse.Status == 429) {
@@ -271,7 +271,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                       responseText = "Beklenmeyen bir hata alındı: " + rawResponse.ReasonPhrase;
                 }
            } else {
-                responseText = response.Choices.First().Message.Content;
+                responseText = response.Value.Choices.First().Message.Content;
            }
            return responseText;
         }

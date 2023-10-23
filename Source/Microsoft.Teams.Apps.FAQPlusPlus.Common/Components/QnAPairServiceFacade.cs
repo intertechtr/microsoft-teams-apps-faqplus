@@ -87,6 +87,16 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
         }
 
+         public static string ReplaceRelativeMarkDownLinks(string str)
+         {
+             string pattern = @"\[(.*?)\]\(\/[^\)]*\)";             
+             return Regex.Replace(str, pattern, m =>
+             {
+                 string linkText = m.Groups[1].Value; 
+                 string url = m.Value.Substring(m.Value.IndexOf('(') + 1, m.Value.LastIndexOf(')') - m.Value.IndexOf('(') - 1);
+                 return $"[{linkText}](https://confluence.intertech.com.tr{url})";
+             });
+         }
         /// <summary>
         /// Get the reply to a question asked by end user.
         /// </summary>
@@ -273,7 +283,8 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
            } else {
                 responseText = response.Value.Choices.First().Message.Content;
            }
-           return responseText;
+           
+           return ReplaceRelativeMarkDownLinks(responseText);
         }
 
         /// <summary>

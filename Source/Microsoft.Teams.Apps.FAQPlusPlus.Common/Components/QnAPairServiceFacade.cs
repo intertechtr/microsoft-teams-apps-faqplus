@@ -283,7 +283,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
            } else {
                 responseText = response.Value.Choices.First().Message.Content;
            }
-           
+           this.logger.Log(LogLevel.Information,"Response:" + responseText);
            return ReplaceRelativeMarkDownLinks(responseText);
         }
 

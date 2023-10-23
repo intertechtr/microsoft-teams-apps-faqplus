@@ -11,7 +11,9 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
     using global::Azure.Search.Documents.Models;
     using global::Azure.AI.Language.QuestionAnswering;
     using global::Azure.Search.Documents;
-
+    
+    
+    using System.Text.RegularExpressions;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;

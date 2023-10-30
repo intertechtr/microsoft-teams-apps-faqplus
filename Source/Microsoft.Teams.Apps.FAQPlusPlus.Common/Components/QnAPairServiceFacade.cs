@@ -214,7 +214,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             using (var sr = new StreamReader(returnData.GetRawResponse().Content.ToStream()))
            using (var jsonTextReader = new JsonTextReader(sr))
             {
-                searchResult = "No information was found. Answer the question with your general knowledge. Let the user know that you have not found any information in the knowledge base and are responding with your general knowledge from the internet.";";  
+                searchResult = "No information was found. Answer the question with your general knowledge. Let the user know that you have not found any information in the knowledge base and are responding with your general knowledge from the internet.";  
              
                 var jsObj = serializer.Deserialize(jsonTextReader) as JObject;
                 var valueSection = jsObj["value"];

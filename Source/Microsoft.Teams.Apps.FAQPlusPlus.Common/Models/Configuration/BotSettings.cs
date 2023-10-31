@@ -53,5 +53,6 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Models.Configuration
         public string SettingForPrompt { get; set; }
         public string SettingForTemperature { get; set; }
         public string SettingForMaxToken{ get; set; }
+        public string SettingForTopK{ get; set; }
     }
 }

@@ -231,7 +231,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                 }
 
                 int i = 0;
-
+                searchResult = "";
                 foreach (var child in valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).Take(Convert.ToInt32(options.SettingForTopK)))
                 {
                     i++;

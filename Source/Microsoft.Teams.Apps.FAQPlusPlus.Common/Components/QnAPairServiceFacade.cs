@@ -198,7 +198,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             searchOptions.QueryCaption = "extractive";
             searchOptions.QueryAnswer = "extractive";
             searchOptions.QueryType = global::Azure.Search.Documents.Models.SearchQueryType.Semantic;
-            searchOptions.Size = options.SettingForTopK;
+            searchOptions.Size = Convert.ToInt32(options.SettingForTopK);
 
             var returnData = srchclient.Search<SearchDocument>(searchQuery, searchOptions);
 
@@ -232,10 +232,10 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
 
                 int i = 0;
 
-                foreach (var child in valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]))
+                foreach (var child in valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).Take(Convert.ToInt32(options.SettingForTopK)))
                 {
                     i++;
-                    searchResult += "Result " + i + ": " + child["content"].Value<string>() + "\n\n";
+                    searchResult += "[Result " + i + "]: " + child["content"].Value<string>() + "\n\n";
                 }
             }
 

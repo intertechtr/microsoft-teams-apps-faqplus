@@ -198,7 +198,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             searchOptions.QueryCaption = "extractive";
             searchOptions.QueryAnswer = "extractive";
             searchOptions.QueryType = global::Azure.Search.Documents.Models.SearchQueryType.Semantic;
-            searchOptions.QueryAnswerCount = 5;
+            searchOptions.Size = options.SettingForTopK;
 
             var returnData = srchclient.Search<SearchDocument>(searchQuery, searchOptions);
 
@@ -214,20 +214,29 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             using (var sr = new StreamReader(returnData.GetRawResponse().Content.ToStream()))
             using (var jsonTextReader = new JsonTextReader(sr))
             {
+                searchResult = "No information was found. Answer the question with your general knowledge. Let the user know that you have not found any information in the knowledge base and are responding with your general knowledge from the internet.";  
+
                 var jsObj = serializer.Deserialize(jsonTextReader) as JObject;
                 var valueSection = jsObj["value"];
-                var reRankerScore = Convert.ToDecimal(valueSection.Children().First()["@search.rerankerScore"].Value<string>());
-                
-                if(reRankerScore<1)
+                if (valueSection == null || !valueSection.HasValues)
                 {
-                    return "No information was found. Answer the question with your general knowledge.";  
+                    return searchResult;
                 }
-                searchResult = valueSection.Children().First()["content"].Value<string>();
 
-                //searchResult = valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
+                var reRankerScore = Convert.ToDecimal(valueSection.Children().First()["@search.rerankerScore"].Value<string>());
 
-                //jsObj["value"].Children().OrderByDescending(o => o["@search.rerankerScore"]).First()["content"].Value<string>();
+                if(reRankerScore < 1)
+                {
+                    return searchResult;
+                }
 
+                int i = 0;
+
+                foreach (var child in valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]))
+                {
+                    i++;
+                    searchResult += "Result " + i + ": " + child["content"].Value<string>() + "\n\n";
+                }
             }
 
             return searchResult;

@@ -131,7 +131,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus
                 botSettings.SettingForPrompt = this.Configuration["SettingForPrompt"];
                 botSettings.SettingForTemperature = this.Configuration["SettingForTemperature"];
                 botSettings.SettingForMaxToken = this.Configuration["SettingForMaxToken"];
-                
+                botSettings.SettingForTopK = this.Configuration["SettingForTopK"];                
                 
             });
             services.AddSingleton<Common.Providers.IConfigurationDataProvider>(new Common.Providers.ConfigurationDataProvider(this.Configuration["StorageConnectionString"]));

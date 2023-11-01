@@ -109,7 +109,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
             ITurnContext<IMessageActivity> turnContext,
             IMessageActivity message)
         {
-            string text = message.Text?.ToLower()?.Trim() ?? string.Empty;
+            string text = message.Text?.Trim() ?? string.Empty;
 
             try
             {

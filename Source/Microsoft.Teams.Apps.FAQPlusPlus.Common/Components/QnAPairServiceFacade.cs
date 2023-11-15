@@ -235,7 +235,8 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Common.Components
                 foreach (var child in valueSection.Children().OrderByDescending(o => o["@search.rerankerScore"]).Take(Convert.ToInt32(options.SettingForTopK)))
                 {
                     i++;
-                    searchResult += "[Result " + i + "]: " + child["content"].Value<string>() + "\n\n";
+                    //searchResult += "[Result " + i + "]: " + child["content"].Value<string>() + "\n\n";
+                    searchResult += "[Result]: <Title>" + child["hierarchy"] + "</Title><Url>" + child["sourceUrl"] + "</Url>\n" + child["content"].Value<string>() + "\n\n";
                 }
             }
 
